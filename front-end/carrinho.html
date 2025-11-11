@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrinho - Turma Atacadão</title>
+    <link rel="icon" type="image/png" href="css/turma.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Seu Carrinho</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="produtos.html">Produtos</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Onde os itens do carrinho serão carregados -->
+        <section id="carrinho-container"></section>
+
+        <!-- Total e botão de compra -->
+        <h3 id="total"></h3>
+        <button id="finalizar-btn">Finalizar Compra</button>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js"></script>
+
+    <!-- Configuração do Firebase -->
+    <script type="module" src="js/firebaseConfig.js"></script>
+
+    <!-- Lógica do Carrinho (novo arquivo separado) -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+{
+  "P0001": {
+    "nome": "Arroz 5kg",
+    "preco": 25.90,
+    "estoque": 100,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525731-1600-auto?v=638924232977400000&width=1600&height=auto&aspect=true"
+  },
+  "P0002": {
+    "nome": "Feijão Carioca 1kg",
+    "preco": 12.50,
+    "estoque": 80,
+    "vendidos": 0,
+    "imagem": "https://ibassets.com.br/ib.item.image.large/l-8368f008dedf42b0864b7fcf2f3bdab2.png"
+  },
+  "P0003": {
+    "nome": "Óleo de Soja 900ml",
+    "preco": 8.90,
+    "estoque": 60,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525733-1600-auto"
+  },
+  "P0004": {
+    "nome": "Açúcar Refinado 1kg",
+    "preco": 4.50,
+    "estoque": 50,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525734-1600-auto"
+  },
+  "P0005": {
+    "nome": "Farinha de Trigo 1kg",
+    "preco": 5.90,
+    "estoque": 70,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525735-1600-auto"
+  },
+  "P0006": {
+    "nome": "Leite Integral 1L",
+    "preco": 6.50,
+    "estoque": 90,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525736-1600-auto"
+  },
+  "P0007": {
+    "nome": "Café Torrado 500g",
+    "preco": 14.90,
+    "estoque": 40,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525737-1600-auto"
+  },
+  "P0008": {
+    "nome": "Macarrão Espaguete 500g",
+    "preco": 6.00,
+    "estoque": 100,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525738-1600-auto"
+  },
+  "P0009": {
+    "nome": "Molho de Tomate 340g",
+    "preco": 3.50,
+    "estoque": 80,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525739-1600-auto"
+  },
+  "P0010": {
+    "nome": "Biscoito Recheado 200g",
+    "preco": 4.20,
+    "estoque": 90,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525740-1600-auto"
+  },
+  "P0011": {
+    "nome": "Margarina 500g",
+    "preco": 7.50,
+    "estoque": 60,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525741-1600-auto"
+  },
+  "P0012": {
+    "nome": "Refrigerante Cola 2L",
+    "preco": 10.90,
+    "estoque": 50,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525742-1600-auto"
+  },
+  "P0013": {
+    "nome": "Suco de Laranja 1L",
+    "preco": 5.90,
+    "estoque": 70,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525743-1600-auto"
+  },
+  "P0014": {
+    "nome": "Sal Refinado 1kg",
+    "preco": 3.80,
+    "estoque": 100,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525744-1600-auto"
+  },
+  "P0015": {
+    "nome": "Cereal Matinal 300g",
+    "preco": 12.90,
+    "estoque": 60,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525745-1600-auto"
+  },
+  "P0016": {
+    "nome": "Queijo Mussarela 500g",
+    "preco": 18.50,
+    "estoque": 50,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525746-1600-auto"
+  },
+  "P0017": {
+    "nome": "Presunto 300g",
+    "preco": 14.50,
+    "estoque": 50,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525747-1600-auto"
+  },
+  "P0018": {
+    "nome": "Iogurte Natural 1kg",
+    "preco": 9.50,
+    "estoque": 70,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525748-1600-auto"
+  },
+  "P0019": {
+    "nome": "Bolo Pronto 400g",
+    "preco": 11.50,
+    "estoque": 40,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525749-1600-auto"
+  },
+  "P0020": {
+    "nome": "Chocolate em Pó 400g",
+    "preco": 7.90,
+    "estoque": 80,
+    "vendidos": 0,
+    "imagem": "https://supernossoio.vtexassets.com/arquivos/ids/1525750-1600-auto"
+  }
+}

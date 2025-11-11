@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="icon" type="image/png" href="css/turma.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <button id="theme-toggle">🌙</button>
+
+    <form id="cadastro-form">
+        <h2>Cadastro</h2>
+
+        <input type="text" id="nome_completo" placeholder="Nome completo" required>
+        <input type="text" id="cpf" placeholder="CPF" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="telefone" placeholder="Telefone" required>
+        <input type="text" id="endereco" placeholder="Endereço" required>
+        <input type="password" id="senha" placeholder="Senha" required>
+
+        <button type="submit">Cadastrar</button>
+
+        <p>Já tem conta? <a href="login.html">Faça login</a></p>
+    </form>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore-compat.js"></script>
+
+    <!-- Config -->
+    <script type="module" src="/front-end/js/firebaseConfig.js"></script>
+
+    <!-- JS Cadastro -->
+    <script type="module" src="/front-end/js/cadastro.js"></script>
+
+</body>
+</html>

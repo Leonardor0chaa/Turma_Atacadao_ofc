@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos - Turma Atacadão</title>
+    <link rel="icon" type="image/png" href="css/turma.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Turma Atacadão</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="carrinho.html">Carrinho</a>
+        </nav>
+        <!-- MODIFICAÇÃO AQUI: Adicionado um <span> para o texto do carrinho -->
+        <div id="carrinho-info">
+            <span id="contador-carrinho-texto">Carrinho: 0 itens</span>
+            <button class="car" onclick="irParaCarrinho()">
+                <img class="little-car" src="https://cdn-icons-png.flaticon.com/512/25/25619.png"
+                    alt="Ícone do Carrinho">
+            </button>
+        </div>
+    </header>
+
+    <div class="filtros-categorias">
+        <button class="btn-filtro ativo" data-categoria="todos">Todos</button>
+        <button class="btn-filtro" data-categoria="graos">Grãos</button>
+        <button class="btn-filtro" data-categoria="carnes">Carnes</button>
+        <button class="btn-filtro" data-categoria="gorduras">Gorduras & Óleos</button>
+        <button class="btn-filtro" data-categoria="massas">Massas</button>
+        <button class="btn-filtro" data-categoria="frutas">Frutas & Verduras</button>
+        <button class="btn-filtro" data-categoria="laticinios">Laticínios</button>
+        <button class="btn-filtro" data-categoria="bebidas">Bebidas</button>
+        <button class="btn-filtro" data-categoria="padaria">Padaria</button>
+        <button class="btn-filtro" data-categoria="limpeza">Limpeza</button>
+        <button class="btn-filtro" data-categoria="higiene">Higiene</button>
+        <button class="btn-filtro" data-categoria="doces">Açucares & Doces</button>
+        <button class="btn-filtro" data-categoria="snacks">Salgadinhos</button>
+        <button class="btn-filtro" data-categoria="culinarios">Culinários</button>
+        <button class="btn-filtro" data-categoria="outros">Outros</button>
+    </div>
+
+    <main>
+        <section id="produtos-container"></section>
+    </main>
+
+    <!-- scripts principais -->
+    <script src="js/main.js"></script>
+    <script src="js/produtos.js"></script> <!-- 🔥 Importa o novo script -->
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Turma Atacadão</title>
+    <link rel="icon" type="image/png" href="css/turma.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Turma Atacadão</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="produtos.html">Produtos</a>
+            <a href="carrinho.html">Carrinho</a>
+            <a href="#footer-contato">Contato</a>
+        </nav>
+        <!-- MODIFICAÇÃO AQUI: Adicionado um <span> para o texto do carrinho -->
+        <div id="carrinho-info">
+            <span id="contador-carrinho-texto">Carrinho: 0 itens</span>
+            <button class="car" onclick="irParaCarrinho()">
+                <img class="little-car" src="https://cdn-icons-png.flaticon.com/512/25/25619.png"
+                    alt="Ícone do Carrinho">
+            </button>
+        </div>
+
+        <!-- BOTÃO DE TEMA -->
+        <button id="theme-toggle" title="Alternar tema">🌙</button>
+
+        <!-- Menu Conta -->
+        <div id="conta-menu" class="conta-menu">
+            <button id="conta-btn" class="conta-btn">👤 Conta</button>
+            <div id="conta-dropdown" class="conta-dropdown" style="display:none;">
+                <div id="conta-opcoes"></div>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+        <h2>Bem-vindo ao Turma Atacadão!</h2>
+        <p>Confira nossos produtos e aproveite os melhores preços.</p>
+
+        <h3>Produtos em Oferta!</h3>
+        <div id="produtos-container" class="produtos-grid"></div>
+    </main>
+
+    <!-- ============================================== -->
+    <!-- Footer - Contato Turma Atacadão -->
+    <!-- ============================================== -->
+    <footer id="footer-contato">
+        <div class="container-contato">
+            <h2>📞 Fale Conosco</h2>
+            <p>Estamos sempre prontos para te atender! Envie uma mensagem ou fale direto conosco nas redes 👇</p>
+
+            <form class="form-contato" onsubmit="enviarContato(event)">
+                <input type="text" id="nomeContato" placeholder="Seu nome" required>
+                <input type="email" id="emailContato" placeholder="Seu e-mail" required>
+                <textarea id="mensagemContato" placeholder="Digite sua mensagem..." rows="4" required></textarea>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+
+            <div class="social-links">
+                <a href="https://wa.me/551140028922" target="_blank" class="whatsapp" title="WhatsApp">
+                    💬 WhatsApp
+                </a>
+                <a href="mailto:contato@turmaatacadao.com.br" class="email" title="E-mail">
+                    📧 E-mail
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="instagram" title="Instagram">
+                    📷 Instagram
+                </a>
+            </div>
+
+            <div class="info-footer">
+                <p><strong>Turma Atacadão</strong> © 2025 — Todos os direitos reservados</p>
+                <p>📍 Rua dos Comerciantes, 123 — Centro, São Paulo/SP</p>
+                <p>📧 contato@turmaatacadao.com.br | ☎️ (11) 4002-8922</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão flutuante "Voltar ao topo" -->
+    <button id="btnTopo" onclick="voltarAoTopo()">⬆️</button>
+
+    <script>
+        function enviarContato(event) {
+            event.preventDefault();
+            const nome = document.getElementById("nomeContato").value.trim();
+            const email = document.getElementById("emailContato").value.trim();
+            const msg = document.getElementById("mensagemContato").value.trim();
+
+            if (!nome || !email || !msg) {
+                alert("Por favor, preencha todos os campos!");
+                return;
+            }
+
+            alert(`Obrigado pelo contato, ${nome}! Em breve nossa equipe responderá.`);
+            document.querySelector(".form-contato").reset();
+        }
+
+        // Botão voltar ao topo
+        const btnTopo = document.getElementById("btnTopo");
+        window.onscroll = function () {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btnTopo.style.display = "block";
+            } else {
+                btnTopo.style.display = "none";
+            }
+        };
+
+        function voltarAoTopo() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script>
+
+    <script src="js/main.js"></script>
+    <script src="js/conta.js"></script>
+
+</body>
+
+</html>
