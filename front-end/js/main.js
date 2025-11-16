@@ -179,8 +179,11 @@ async function carregarItensCarrinho() {
 
                 itemDiv.innerHTML = `
                     <div class="info-produto">
-                        <h4>${item.nome}</h4>
-                        <p>Preço unitário: R$ ${item.preco.toFixed(2)}</p>
+                        <img src="${item.imagem}" alt="${item.nome}" class="img-carrinho">
+                        <div class="texto-produto">
+                            <h4>${item.nome}</h4>
+                            <p>Preço unitário: R$ ${item.preco.toFixed(2)}</p>
+                        </div>
                     </div>
 
                     <div class="controles-carrinho">
