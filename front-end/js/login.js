@@ -29,15 +29,23 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
         const dados = docSnap.data();
 
+        // 🔹 Salva dados básicos no localStorage (mantido igual)
         localStorage.setItem("usuarioLogado", JSON.stringify({
             uid: user.uid,
             nome: dados.nome_completo,
             email: dados.email,
-            cpf: dados.cpf
+            cpf: dados.cpf,
+            role: dados.role || "usuario" // 🔹 adicionamos o role aqui
         }));
 
-        alert(`Bem-vindo(a), ${dados.nome_completo}!`);
-        window.location.href = "index.html";
+        // 🔹 Verifica o papel do usuário
+        if (dados.role && dados.role.toLowerCase() === "admin") {
+            alert(`Bem-vindo(a), ${dados.nome_completo}! Você entrou como administrador.`);
+            window.location.href = "painel_admin.html";
+        } else {
+            alert(`Bem-vindo(a), ${dados.nome_completo}!`);
+            window.location.href = "index.html";
+        }
 
     } catch (error) {
         console.error("Erro no login:", error);

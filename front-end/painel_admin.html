@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Administrativo</title>
+  <link rel="icon" type="image/png" href="css/turma.png" />
+  <link rel="stylesheet" href="css/adm.css" />
+</head>
+
+<body>
+  <header>
+    <h1>📦 Painel Administrativo</h1>
+    <button id="btn-logout">Sair</button>
+  </header>
+
+  <main>
+    <section id="dados-admin">
+      <h2>Bem-vindo(a), <span id="admin-nome"></span></h2>
+      <p>Email Administrativo: <span id="admin-email"></span></p>
+    </section>
+
+    <hr />
+
+    <section id="formulario">
+      <h2>➕ Cadastrar / Editar Produto</h2>
+      <form id="produtoForm">
+        <input type="hidden" id="produtoId" />
+        <div class="form-grid">
+          <input id="nome" placeholder="Nome do produto" required />
+          <input id="categoria" placeholder="Categoria" required />
+          <input id="preco" type="number" placeholder="Preço" step="0.01" required />
+          <input id="estoque" type="number" placeholder="Estoque" required />
+          <input id="imagem" placeholder="URL da imagem (https://...)" />
+          <label class="checkbox">
+            <input id="emPromocao" type="checkbox" /> Em promoção
+          </label>
+          <input id="precoPromocional" type="number" step="0.01" placeholder="Preço Promocional" />
+        </div>
+        <button type="submit" id="btnSalvar">Salvar Produto</button>
+        <button type="button" id="btnCancelar" class="hidden">Cancelar Edição</button>
+      </form>
+    </section>
+
+    <hr />
+
+    <section id="produtos">
+      <div class="topo-lista">
+        <h2>🧾 Lista de Produtos</h2>
+        <button id="btnRecarregar">🔄 Recarregar</button>
+      </div>
+      <div id="listaProdutos"></div>
+    </section>
+  </main>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-auth-compat.js"></script>
+
+  <!-- Config -->
+  <script type="module" src="/front-end/js/firebaseConfig.js"></script>
+
+  <!-- Script Admin -->
+  <script type="module" src="/front-end/js/admin.js"></script>
+</body>
+</html>

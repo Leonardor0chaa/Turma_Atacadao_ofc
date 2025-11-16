@@ -1,94 +1,174 @@
-// ======================================================
-// admin.js — Painel de administração (com verificação de role)
-// ======================================================
+import { db, auth } from "./firebaseConfig.js";
+import {
+  collection,
+  getDocs,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-import { auth, db } from "./firebaseConfig.js";
-import { 
-  signInWithEmailAndPassword, 
-  onAuthStateChanged, 
-  signOut 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+console.log("%c📂 admin.js carregado", "color: orange; font-weight: bold;");
 
-// Referências aos elementos da página
-const loginCard = document.getElementById("loginCard");
-const adminCard = document.getElementById("adminCard");
-const emailInput = document.getElementById("email");
-const senhaInput = document.getElementById("senha");
-const btnLogin = document.getElementById("btnLogin");
-const btnLogout = document.getElementById("btnLogout");
-const loginMsg = document.getElementById("loginMsg");
-
-// 🔹 Função para exibir/ocultar seções
-function mostrarPainelAdmin(mostrar) {
-  if (mostrar) {
-    loginCard.classList.add("hidden");
-    adminCard.classList.remove("hidden");
-  } else {
-    loginCard.classList.remove("hidden");
-    adminCard.classList.add("hidden");
-  }
+// ===============================
+// VERIFICAÇÃO DE ADMIN
+// ===============================
+const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+if (!usuario || usuario.role?.toLowerCase() !== "admin") {
+  alert("Acesso negado! Apenas administradores podem acessar.");
+  window.location.href = "login.html";
 }
 
-// 🔹 Verifica se o usuário é admin
-async function verificarPermissaoAdmin(user) {
-  try {
-    const userDoc = await getDoc(doc(db, "usuarios", user.uid));
+// Mostrar dados do admin
+document.getElementById("admin-nome").textContent = usuario.nome;
+document.getElementById("admin-email").textContent = usuario.email;
 
-    if (!userDoc.exists()) {
-      throw new Error("Usuário não encontrado no banco de dados.");
+// ===============================
+// CRUD DE PRODUTOS
+// ===============================
+const listaProdutos = document.getElementById("listaProdutos");
+const form = document.getElementById("produtoForm");
+const btnSalvar = document.getElementById("btnSalvar");
+const btnCancelar = document.getElementById("btnCancelar");
+
+let editandoId = null;
+
+// Função para gerar o próximo ID sequencial (ex: P0066)
+async function gerarProximoId() {
+  const produtosRef = collection(db, "produtos");
+  const snapshot = await getDocs(produtosRef);
+  let maiorNumero = 0;
+
+  snapshot.forEach((docSnap) => {
+    const id = docSnap.id;
+    const numero = parseInt(id.replace("P", ""), 10);
+    if (!isNaN(numero) && numero > maiorNumero) {
+      maiorNumero = numero;
     }
+  });
 
-    const dados = userDoc.data();
+  const proximoNumero = maiorNumero + 1;
+  return `P${String(proximoNumero).padStart(4, "0")}`;
+}
 
-    if (dados.role === "admin") {
-      console.log("✅ Usuário tem permissão de administrador.");
-      mostrarPainelAdmin(true);
+// CREATE / UPDATE
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const produto = {
+    nome: document.getElementById("nome").value,
+    categoria: document.getElementById("categoria").value,
+    preco: parseFloat(document.getElementById("preco").value),
+    estoque: parseInt(document.getElementById("estoque").value),
+    imagem: document.getElementById("imagem").value,
+    em_promocao: document.getElementById("emPromocao").checked,
+    preco_promocional: parseFloat(
+      document.getElementById("precoPromocional").value || 0
+    ),
+    vendidos: 0,
+  };
+
+  try {
+    if (editandoId) {
+      // Atualizar produto existente
+      const ref = doc(db, "produtos", editandoId);
+      await updateDoc(ref, produto);
+      alert("✅ Produto atualizado com sucesso!");
+      editandoId = null;
+      btnCancelar.classList.add("hidden");
     } else {
-      console.warn("⛔ Acesso negado. Usuário não é administrador.");
-      alert("Acesso negado! Apenas administradores podem acessar esta página.");
-      await signOut(auth);
-      mostrarPainelAdmin(false);
+      // Criar novo produto com ID sequencial
+      const novoId = await gerarProximoId();
+      await setDoc(doc(db, "produtos", novoId), produto);
+      alert(`✅ Produto cadastrado com sucesso! ID: ${novoId}`);
     }
-  } catch (erro) {
-    console.error("Erro ao verificar permissão:", erro);
-    alert("Erro ao verificar permissão de administrador.");
+
+    form.reset();
+    carregarProdutos();
+  } catch (error) {
+    console.error(error);
+    alert("❌ Erro ao salvar produto.");
   }
+});
+
+// READ
+async function carregarProdutos() {
+  listaProdutos.innerHTML = "<p>Carregando produtos...</p>";
+
+  const querySnapshot = await getDocs(collection(db, "produtos"));
+  listaProdutos.innerHTML = "";
+
+  querySnapshot.forEach((docSnap) => {
+    const p = docSnap.data();
+    const card = document.createElement("div");
+    card.classList.add("produto-card");
+    card.innerHTML = `
+      <div class="produto-card-left">
+        <img src="${p.imagem || 'https://via.placeholder.com/100'}" 
+         alt="${p.nome}" 
+         class="produto-img">
+      </div>
+
+      <div class="produto-info">
+        <h3>${p.nome}</h3>
+        <p><strong>Categoria:</strong> ${p.categoria}</p>
+        <p><strong>Preço:</strong> R$ ${p.preco.toFixed(2)}</p>
+        <p><strong>Estoque:</strong> ${p.estoque}</p>
+      </div>
+
+      <div class="produto-acoes">
+        <button class="editar">✏️</button>
+        <button class="excluir">🗑️</button>
+      </div>
+      `;
+
+    // Editar produto
+    card.querySelector(".editar").addEventListener("click", () => {
+      editandoId = docSnap.id;
+      document.getElementById("nome").value = p.nome;
+      document.getElementById("categoria").value = p.categoria;
+      document.getElementById("preco").value = p.preco;
+      document.getElementById("estoque").value = p.estoque;
+      document.getElementById("imagem").value = p.imagem;
+      document.getElementById("emPromocao").checked = p.em_promocao;
+      document.getElementById("precoPromocional").value =
+        p.preco_promocional || "";
+      btnCancelar.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Excluir produto
+    card.querySelector(".excluir").addEventListener("click", async () => {
+      if (confirm(`Tem certeza que deseja excluir "${p.nome}"?`)) {
+        await deleteDoc(doc(db, "produtos", docSnap.id));
+        alert("🗑️ Produto excluído com sucesso!");
+        carregarProdutos();
+      }
+    });
+
+    listaProdutos.appendChild(card);
+  });
 }
 
-// 🔹 Listener de login automático (verifica se está logado)
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    await verificarPermissaoAdmin(user);
-  } else {
-    mostrarPainelAdmin(false);
-  }
+// Cancelar edição
+btnCancelar.addEventListener("click", () => {
+  editandoId = null;
+  form.reset();
+  btnCancelar.classList.add("hidden");
 });
 
-// 🔹 Evento de login
-btnLogin.addEventListener("click", async () => {
-  const email = emailInput.value.trim();
-  const senha = senhaInput.value.trim();
-  loginMsg.textContent = "";
+// Botão atualizar
+document
+  .getElementById("btnRecarregar")
+  .addEventListener("click", carregarProdutos);
 
-  if (!email || !senha) {
-    loginMsg.textContent = "Preencha todos os campos.";
-    return;
-  }
-
-  try {
-    const credenciais = await signInWithEmailAndPassword(auth, email, senha);
-    console.log("✅ Login realizado:", credenciais.user.email);
-    await verificarPermissaoAdmin(credenciais.user);
-  } catch (erro) {
-    console.error("Erro ao fazer login:", erro);
-    loginMsg.textContent = "Falha no login. Verifique email e senha.";
-  }
-});
-
-// 🔹 Evento de logout
-btnLogout.addEventListener("click", async () => {
+// Logout
+document.getElementById("btn-logout").addEventListener("click", async () => {
   await signOut(auth);
-  mostrarPainelAdmin(false);
-  console.log("👋 Usuário deslogado.");
+  localStorage.removeItem("usuarioLogado");
+  window.location.href = "login.html";
 });
+
+// Ao carregar
+carregarProdutos();
