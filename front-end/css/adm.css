@@ -142,3 +142,77 @@ button:hover {
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+
+/* ==============================
+   Tema Escuro
+============================== */
+body.dark-mode .produto-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+    color: #f1f1f1;
+}
+
+body.dark-mode .produto-card button {
+    background-color: #3399ff;
+}
+
+body.dark-mode .produto-card button:hover {
+    background-color: #1a80e0;
+}
+
+body.dark-mode .badge-oferta {
+    background-color: #4a0000;
+    color: #ff6666;
+}
+
+/* ================== TEMA ESCURO ================== */
+body.dark-mode {
+    background: linear-gradient(to top, #1c1c1c, #333, #1c1c1c);
+    color: #f0f0f0;
+}
+
+body.dark-mode header {
+    background-color: #111;
+    color: #fff;
+}
+
+body.dark-mode main {
+    background-color: #222;
+    color: #f0f0f0;
+}
+
+body.dark-mode .produto-card {
+    background-color: #333;
+    border-color: #444;
+    color: #f0f0f0;
+}
+
+body.dark-mode .produto-card h3,
+body.dark-mode .produto-card p {
+    color: #f0f0f0;
+}
+
+body.dark-mode .item-carrinho-card {
+    background-color: #333;
+    border-color: #444;
+    color: #f0f0f0;
+}
+
+body.dark-mode .item-carrinho-card h4,
+body.dark-mode .item-carrinho-card p {
+    color: #f0f0f0;
+}
+
+/* Botão alternar tema */
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4em;
+    margin-left: 10px;
+    transition: transform 0.2s ease;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.2);
+}

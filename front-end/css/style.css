@@ -738,3 +738,63 @@ body.dark-mode .footer-contato {
     margin: 0;
     color: #444;
 }
+
+
+/* ============================
+      SLIDER / BANNER
+============================ */
+
+:root{
+      --height: 420px;
+      --accent: #0ea5a4;
+      --bg: #0f172a;
+      --glass: rgba(255,255,255,0.06);
+    }
+    .slider-wrap{width:100%; max-width:100%; position:relative; overflow:hidden; border-radius:12px; box-shadow:0 8px 30px rgba(2,6,23,0.15); }
+    .slider{display:flex; transition:transform 600ms cubic-bezier(.22,.9,.38,1); will-change:transform;}
+    .slide{min-width:100%; height:var(--height); position:relative; display:flex; align-items:flex-end; color:#fff}
+    .slide img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(1.05) saturate(1.05)}
+    .slide::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.45) 100%)}
+
+
+    /* arrows */
+    .arrow{position:absolute; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:10px; background:var(--glass); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:3; backdrop-filter:blur(6px);}
+    .arrow svg{width:20px; height:20px}
+    .arrow.left{left:12px}
+    .arrow.right{right:12px}
+
+    /* dots */
+    .dots{position:absolute; left:50%; transform:translateX(-50%); bottom:12px; display:flex; gap:8px; z-index:4}
+    .dot{width:12px; height:12px; border-radius:50%; background:rgba(255,255,255,0.3); cursor:pointer; transition:transform .2s}
+    .dot.active{background:var(--accent); transform:scale(1.2)}
+
+    /* responsive */
+    @media (max-width:720px){:root{--height:320px} .title{font-size:20px} .content{padding:18px}}
+
+    /* Garantir que o menu Conta fique acima de tudo */
+    .conta-menu {
+        position: relative;       /* necessário para o dropdown seguir */
+        z-index: 9999;            /* acima do slider */
+    }
+
+    /* Dropdown da conta */
+    .conta-dropdown {
+        position: absolute;
+        top: 40px;                /* ajusta a posição vertical */
+        right: 0;
+        background: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 12px;
+        min-width: 180px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        z-index: 10000;          /* SUPERIOR ao slider */
+    }
+
+    /* Itens do dropdown */
+    .conta-dropdown div,
+    .conta-dropdown button {
+        padding: 8px;
+        font-size: 15px;
+        cursor: pointer;
+    }

@@ -39,6 +39,36 @@
 
     </header>
 
+    <!-- ============= BANNER SLIDER ============== -->
+    <div class="slider-wrap" id="sliderWrap" aria-roledescription="carousel">
+        <div class="slider" id="slider" aria-live="polite">
+            <section class="slide" data-title="Ofertas da Semana" data-sub="Frutas, verduras e mais com desconto">
+                <img src="css/banner2.png" alt="Frutas frescas" />
+            </section>
+
+            <section class="slide" data-title="Mercearia Granel" data-sub="Economize comprando em maior volume">
+                <img src="css/banner3.png" alt="Prateleiras de mercearia" />
+            </section>
+
+            <section class="slide" data-title="Padaria & Açougue" data-sub="Pães quentinhos e cortes selecionados">
+                <img src="css/banner1.png" alt="Padaria e açougue" />
+            </section>
+        </div>
+
+        <button class="arrow left" id="prev" aria-label="Slide anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+        <button class="arrow right" id="next" aria-label="Próximo slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <div class="dots" id="dots" role="tablist" aria-label="Navegação por slides"></div>
+    </div>
+
     <main>
         <h2>Bem-vindo ao Turma Atacadão!</h2>
         <p>Confira nossos produtos e aproveite os melhores preços.</p>

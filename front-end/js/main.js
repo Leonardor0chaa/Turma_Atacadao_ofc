@@ -395,3 +395,72 @@ function logout() {
     localStorage.removeItem("usuario_logado");
     window.location.href = "login.html";
 }
+
+(function () {
+            const slider = document.getElementById('slider');
+            const slides = Array.from(slider.children);
+            const prevBtn = document.getElementById('prev');
+            const nextBtn = document.getElementById('next');
+            const dotsWrap = document.getElementById('dots');
+            const wrap = document.getElementById('sliderWrap');
+
+            let index = 0;
+            let autoplay = true;
+            let interval = 8000;
+            let timer = null;
+
+            function goTo(i, animate = true) {
+                index = (i + slides.length) % slides.length;
+                if (!animate) slider.style.transition = 'none'; else slider.style.transition = '';
+                slider.style.transform = `translateX(${-index * 100}%)`;
+                updateDots();
+                setTimeout(() => slider.style.transition = '', 20);
+            }
+
+            function next() { goTo(index + 1) }
+            function prev() { goTo(index - 1) }
+
+            // build dots
+            slides.forEach((s, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'dot';
+                btn.setAttribute('aria-label', `Ir para slide ${i + 1}`);
+                btn.setAttribute('role', 'tab');
+                btn.addEventListener('click', () => { goTo(i); resetTimer(); });
+                dotsWrap.appendChild(btn);
+            });
+
+            function updateDots() {
+                Array.from(dotsWrap.children).forEach((d, i) => d.classList.toggle('active', i === index));
+            }
+
+            prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+            nextBtn.addEventListener('click', () => { next(); resetTimer(); });
+
+            // keyboard
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') { next(); resetTimer(); }
+                if (e.key === 'ArrowLeft') { prev(); resetTimer(); }
+            });
+
+            // autoplay
+            function startTimer() { if (autoplay) timer = setInterval(next, interval); }
+            function stopTimer() { if (timer) { clearInterval(timer); timer = null } }
+            function resetTimer() { stopTimer(); startTimer(); }
+
+            wrap.addEventListener('mouseenter', () => stopTimer());
+            wrap.addEventListener('mouseleave', () => startTimer());
+
+            // swipe support (touch)
+            let startX = 0; let deltaX = 0;
+            wrap.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; stopTimer(); });
+            wrap.addEventListener('touchmove', (e) => { deltaX = e.touches[0].clientX - startX; });
+            wrap.addEventListener('touchend', () => { if (Math.abs(deltaX) > 50) { if (deltaX < 0) next(); else prev(); } deltaX = 0; startTimer(); resetTimer(); });
+
+            // init
+            goTo(0, false);
+            startTimer();
+
+            // expose for debugging
+            window._bannerSlider = { goTo, next, prev };
+        })();

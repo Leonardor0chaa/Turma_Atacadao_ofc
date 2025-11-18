@@ -60,3 +60,31 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
         }
     }
 });
+
+// ==============================================
+// Alternar tema claro/escuro
+// ==============================================
+
+const themeToggleBtn = document.getElementById("theme-toggle");
+
+function aplicarTemaInicial() {
+    const temaSalvo = localStorage.getItem("tema") || "claro";
+    if (temaSalvo === "escuro") {
+        document.body.classList.add("dark-mode");
+        if (themeToggleBtn) themeToggleBtn.textContent = "☀️";
+    } else {
+        document.body.classList.remove("dark-mode");
+        if (themeToggleBtn) themeToggleBtn.textContent = "🌙";
+    }
+}
+
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const modoEscuroAtivo = document.body.classList.contains("dark-mode");
+        localStorage.setItem("tema", modoEscuroAtivo ? "escuro" : "claro");
+        themeToggleBtn.textContent = modoEscuroAtivo ? "☀️" : "🌙";
+    });
+}
+
+window.addEventListener("load", aplicarTemaInicial);
